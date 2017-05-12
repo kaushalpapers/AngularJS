@@ -14,7 +14,7 @@ $('#mydiv').bind('keydown', function(event) {
  $('.test').each(function(){
     var list  = $(this).find('[tabindex]').sort(function(a,b){ return a.tabIndex < b.tabIndex ? -1 : 1; }),
 
-    first = list.first();;
+    first = list.first();
 
     list.last().on('keydown', function(e){
         if( e.keyCode === 9 ) {
