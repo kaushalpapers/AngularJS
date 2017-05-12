@@ -5,10 +5,10 @@ $('.test').children().focus(function(){
     
 });
 
-//  $('#mydiv').bind('keydown', function(event) {
-//     //console.log(event.keyCode);
-//    alert(event.keyCode);
-//  });
+$('#mydiv').bind('keydown', function(event) {
+   //console.log(event.keyCode);
+   alert(event.keyCode);
+});
 
 
  $('.test').each(function(){
