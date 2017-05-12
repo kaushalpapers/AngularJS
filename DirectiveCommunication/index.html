@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <title>My Angular App</title>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="DirectiveCommunication/IsolatedDirective.js"></script>
+    <script src="DirectiveCommunication/ParentDirective.js"></script>
+    <script src="DirectiveCommunication/ChildDirective.js"></script>
+</head>
+<body ng-app="app">
+
+    <div ng-controller="firstcontroller">
+
+        <div>
+            <h6>FirstController:</h6>
+        </div>
+
+        <div ng-click="CheckWhoIsParent()">I am Child Directive</div>
+
+        <h6>Isolated</h6>
+        <div isolated-directive>
+
+        </div>
+
+        <h6>Parent</h6>
+        <div parent-directive>
+
+        </div>
+
+        <h6>Child</h6>
+        <div child-directive>
+
+        </div>
+
+    </div>
+</body>
+</html>
