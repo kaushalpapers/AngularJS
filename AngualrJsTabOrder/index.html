@@ -1,23 +1,37 @@
 <!doctype html>
-<html ng-app>
+<html>
 
 <head>
   <title>My AngularJS App</title>
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>-->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  
 </head>
 
 <body>
-  <div class="test">
-    <input type="text" name="first" value=""  tabindex="1">
+  <!--<div class="test">
+    <input type="text" name="first"  tabindex="1">
     <input type="text" name="second" tabindex="3">
     <input type="text" name="third"  tabindex="2">
     <div name="fourth" id="mydiv"  tabindex="4">div</div>
     <span name="sixth" id="myspan"  tabindex="5">span</span>
-    <input type="text" name="fifth" >
+    <input type="text" name="fifth">
+  </div>-->
+
+  <div ng-app="tabOrderModule">
+    
+    <div auto-tab-order>
+      <input type="text" name="first"  tabindex="1">
+    <input type="text" name="second" tabindex="3">
+    <input type="text" name="third"  tabindex="2">
+     <div name="fourth" id="mydiv"  tabindex="4">div</div>
+    <span name="sixth" id="myspan"  tabindex="5">span</span>
+    </div>
+
   </div>
   <span id="result"></span>
-  <script src="script.js"></script>
+  <!--<script src="script.js"></script>-->
+  <script src="autoTabOrder.js"></script>
 </body>
 
 </html>
