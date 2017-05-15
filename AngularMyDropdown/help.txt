@@ -1,5 +1,6 @@
 1. In mydropdown.js,  copy from line# 9 to line#19, paste in your code
 2. In mydropdown.js,  go to setValue() function, add extra condition where we are setting value to textbox. 
-    Note: Added extra condtion that 
+3. The element on which you want dropdown, must have first value already filled up and must have tabindex attribute
+
+ Note: Just for your knowledge, Added extra condtion in step-02 that 
     checks if the element is not textbox(input - tagName), then it should be div, so we are setting html not value.
-3. The element on which you want dropdown, must have first value filled up and must have tabindex attribute
