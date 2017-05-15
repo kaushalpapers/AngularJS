@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app='main'>
+
+<head>
+  <title>My AngularJS App</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <style>
+    .hoverclass {
+      background-color: yellow;
+      color: black;
+    }
+    .list-item{
+      border: 1px solid black;
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div my-dropdown>
+    <div><input type="text" my-textbox></div>
+    <!--<div my-textbox tabindex="0" >Test</div>-->
+    <div my-list my-list-item-hover-class="hoverclass">
+      <div my-list-item ng-repeat="item in [1,2,3,4,5]" class="list-item">
+        <div my-list-item-value>{{item}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div><input type="text" /></div>
+
+  <script src="myDropDown.js"></script>
+</body>
+
+</html>
