@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>My AngularJS App</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-route.js"></script>
+</head>
+
+<body>
+    <div ng-app="mymodule">
+       <p><a href="#/">View1</a></p>
+        <a href="#view2">View2</a>
+        <div ng-view></div>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script src="view1/view1Ctrl.js"></script>
+    <script src="view2/view2Ctrl.js"></script>
+    <script src="focusMe.js"></script>
+</body>
+
+</html>
