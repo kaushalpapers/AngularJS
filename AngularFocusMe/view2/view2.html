@@ -1,4 +1,9 @@
 <input type="text" id="txt1View2" name="" value="2">
 <input type="text" id="txt2View2" name="" value="2">
-<input type="text" id="txt3View2" name="" value="2" focus-me is-focused="isText2Focused" >
+
+<div style="border:1px solid black; margin:5px 5px 5px 5px; padding:5px 5px 5px 5px" ng-show="isShown">
+    <input type="text" id="txt3View2" name="" ng-model="txt3View2Val" value="2" do-focus='focusText3' focus-me >
+</div>
+
 <input type="text" id="txt4View2" name="" value="2">
+<button ng-click="showDiv();">OK</button>

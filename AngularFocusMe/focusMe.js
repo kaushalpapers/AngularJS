@@ -1,29 +1,21 @@
 function focusMe($timeout) {
     return {
         restrict: 'A',
-        // scope: {
-        //     isFocused : '='
-        // },
+        scope: {
+            doFocus: '='
+        },
         link: function (scope, element, attrs) {
             log('focusMe directive loaded!!');
-            $timeout(function(){
-                        element.focus();
-                    }, 10);
 
-            // scope.$watch('isFocused', function(){
-            //     log('focusMe directive: isFocused changed..'+ scope.isFocused);
-            //     if(scope.isFocused)
-            //     {
-            //         log('focusMe directive: Trying to focus. isFocused: '+ scope.isFocused);
-            //         $timeout(function(){
-            //             element.focus();
-            //         }, 10)
-            //     }
-                
-            // });
+            scope.doFocus = function () {
+                log('doFocus called!!');
+                $timeout(function () {
+                    element.focus();
+                }, 1000)
+            }
 
             //private functions
-            function log(msg){
+            function log(msg) {
                 console.log(msg);
             }
         }
