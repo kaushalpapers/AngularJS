@@ -1,6 +1,5 @@
-var app = angular.module("tabOrderModule", []);
-
-app.directive("autoTabOrder", function () {
+function autoTabOrder(){
+    
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
@@ -22,4 +21,8 @@ app.directive("autoTabOrder", function () {
         }
 
     }
-});
+}
+
+var app = angular.module("tabOrderModule", []);
+
+app.directive("autoTabOrder", autoTabOrder);

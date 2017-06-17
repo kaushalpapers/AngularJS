@@ -11,7 +11,7 @@ function focusMe($timeout) {
                 log('doFocus called!!');
                 $timeout(function () {
                     element.focus();
-                }, 1000)
+                }, 1000);
             }
 
             //private functions
