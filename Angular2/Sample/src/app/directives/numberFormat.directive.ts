@@ -1,3 +1,4 @@
+import { elementAt } from 'rxjs/operator/elementAt';
 import { concat } from 'rxjs/observable/concat';
 import { MyCurrencyPipe } from '../pipes/currency.pipe';
 import { NgModel } from '@angular/forms';
@@ -12,6 +13,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Outpu
 })
 export class NumberFormatDirective implements OnInit {
 
+  element: any;
   propVal = 'Default';
 
   @Input()
@@ -27,10 +29,11 @@ export class NumberFormatDirective implements OnInit {
     this.appNumberFormatChange.emit(this.propVal);
   }
 
-  constructor(private ele: ElementRef, private logSvc: LogService, private ngModel: NgModel, private currencyPipe: MyCurrencyPipe) { }
+  constructor(private ele: ElementRef, private logSvc: LogService, private ngModel: NgModel, private currencyPipe: MyCurrencyPipe) {
+    this.element = this.ele.nativeElement;
+  }
 
   ngOnInit() {
-    this.logSvc.log(this.propVal);
     let val = this.propVal;
     val = this.numberWithCommas(val);
     this.ele.nativeElement.value = val;
@@ -43,18 +46,56 @@ export class NumberFormatDirective implements OnInit {
   }
 
   // @HostListener('document:click', ['$event'])
+  @HostListener('keydown', ['$event'])
+  handleKeyDown(event: any) {
+    this.logSvc.log(event.keyCode);
+    const txtVal: string = this.element.value;
+    if (event.keyCode === 8 || event.keyCode === 37 ||
+      event.keyCode === 46 || event.keyCode === 36 ||
+      event.keyCode === 35 || event.keyCode === 39) {
+      return true;
+    }
+    if (!this.validateNumber(event)) {
+      return false;
+    }
+
+    if (event.keyCode === 190 && txtVal.indexOf('.') > -1) {
+      return false;
+    }
+
+    const start = this.element.selectionStart;
+    const end = this.element.selectionEnd;
+
+    if (txtVal.split('.').length > 1 && txtVal.split('.')[1].length >= 4 && start > txtVal.indexOf('.')) {
+      return false;
+    }
+  }
+
   @HostListener('keyup', ['$event'])
-  handleClick(event: any) {
+  handleKeyup(event: any) {
     this.updateValue();
     // return this.validateNumber(event);
   }
 
   updateValue() {
+    let start = this.element.selectionStart;
+    let end = this.element.selectionEnd;
+    // this.logSvc.log('start:' + start + ', end:' + end);
     let val = this.ele.nativeElement.value;
+    const numberOfCommasBefore = (val.match(/,/g) || []).length;
+
     val = val.replace(new RegExp(',', 'g'), '');
     this.appNumberFormat = val;
     val = this.numberWithCommas(val);
+
+    const numberOfCommasAfter = (val.match(/,/g) || []).length;
+
     this.ele.nativeElement.value = val;
+
+    if (numberOfCommasAfter > numberOfCommasBefore) {
+      start++; end++;
+    }
+    this.ele.nativeElement.setSelectionRange(start, end);
   }
 
   numberWithCommas(x) {

@@ -1,6 +1,10 @@
+import { BROWSER_NOOP_ANIMATIONS_PROVIDERS } from '@angular/platform-browser/animations/src/providers';
+import { HttpClient } from '@angular/common/http';
+import { print } from 'util';
 import { LogService } from '../services/log.service';
 import { Hero } from '../model/hero';
 import { Component, OnInit } from '@angular/core';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-basic-list',
@@ -9,13 +13,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasicListComponent implements OnInit {
   singleHero: Hero;
+  heros: Hero[];
+
   customVal: string;
-  constructor(private logSvc: LogService) { }
+  constructor(private logSvc: LogService, private http: HttpClient) { }
 
   ngOnInit() {
     this.logSvc.log('basiclist loaded..');
     this.bindData();
     this.customVal = '1234568';
+
+    const subsc = this.http.post<Hero[]>('http://localhost:3000/data', '');
+    subsc.subscribe(data => {
+      this.heros = data;
+    });
+
   }
 
   bindData() {

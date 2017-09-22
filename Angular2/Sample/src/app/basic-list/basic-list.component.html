@@ -4,9 +4,11 @@
 <b>{{singleHero.name}}</b>
 
 
+<div *ngFor="let hero of heros">
+  {{hero.id}} -- {{hero.name}}
+</div>
 
 <input type="text" [(appNumberFormat)]="customVal" />
 
-<button (click)="logValue()" >Value</button>
-<br />
-Custom Value: {{customVal}}
+<button (click)="logValue()">Value</button>
+<br /> Custom Value: {{customVal}}

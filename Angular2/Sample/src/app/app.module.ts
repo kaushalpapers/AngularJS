@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MyCurrencyPipe } from './pipes/currency.pipe';
 import { NumberFormatDirective } from './directives/numberFormat.directive';
 import { LogService } from './services/log.service';
@@ -16,10 +17,11 @@ import { BasicListComponent } from './basic-list/basic-list.component';
     MyCurrencyPipe
 ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule
   ],
-  providers: [LogService, MyCurrencyPipe],
+  providers: [LogService, MyCurrencyPipe, HttpClientModule, HttpClient ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
