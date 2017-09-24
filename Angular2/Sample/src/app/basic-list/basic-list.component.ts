@@ -22,11 +22,10 @@ export class BasicListComponent implements OnInit {
     this.logSvc.log('basiclist loaded..');
     this.bindData();
     this.customVal = '1234568';
-
-    const subsc = this.http.post<Hero[]>('http://localhost:3000/data', '');
-    subsc.subscribe(data => {
-      this.heros = data;
-    });
+    // const subsc = this.http.post<Hero[]>('http://localhost:3000/data', '');
+    // subsc.subscribe(data => {
+    //   this.heros = data;
+    // });
 
   }
 

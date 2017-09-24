@@ -12,3 +12,10 @@
 
 <button (click)="logValue()">Value</button>
 <br /> Custom Value: {{customVal}}
+
+
+<div appTabOrder>
+  <input type="text" appTabOrderItem value="1" tabOrderIndex="1" tabOrderGroup="First" tabOrderItemBlur="tabOrderItemBlur($event)" />
+  <input type="text" appTabOrderItem value="2" tabOrderIndex="2" tabOrderGroup="First" tabOrderItemBlur="tabOrderItemBlur($event)" />
+  <input type="text" appTabOrderItem value="3" tabOrderIndex="3" tabOrderGroup="First" tabOrderItemBlur="tabOrderItemBlur($event)" /> 
+</div>
