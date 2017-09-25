@@ -1,3 +1,4 @@
+import { decimalDigest } from '@angular/compiler/src/i18n/digest';
 import { elementAt } from 'rxjs/operator/elementAt';
 import { concat } from 'rxjs/observable/concat';
 import { MyCurrencyPipe } from '../pipes/currency.pipe';
@@ -15,6 +16,9 @@ export class NumberFormatDirective implements OnInit {
 
   element: any;
   propVal = 'Default';
+
+  @Input()
+  decimalUpTo = 0;
 
   @Input()
   get appNumberFormat() {
@@ -50,6 +54,11 @@ export class NumberFormatDirective implements OnInit {
   handleKeyDown(event: any) {
     this.logSvc.log(event.keyCode);
     const txtVal: string = this.element.value;
+
+    if (this.decimalUpTo === 0 && event.keyCode === 190) {
+      return false;
+    }
+
     if (event.keyCode === 8 || event.keyCode === 37 ||
       event.keyCode === 46 || event.keyCode === 36 ||
       event.keyCode === 35 || event.keyCode === 39) {
@@ -66,7 +75,7 @@ export class NumberFormatDirective implements OnInit {
     const start = this.element.selectionStart;
     const end = this.element.selectionEnd;
 
-    if (txtVal.split('.').length > 1 && txtVal.split('.')[1].length >= 4 && start > txtVal.indexOf('.')) {
+    if (txtVal.split('.').length > 1 && txtVal.split('.')[1].length >= this.decimalUpTo && start > txtVal.indexOf('.')) {
       return false;
     }
   }

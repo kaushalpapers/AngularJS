@@ -1,3 +1,5 @@
+import { TabOrderDirective } from './directives/tabOrder.directive';
+import { TabOrderItemDirective } from './directives/tabOrderItem.directive';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MyCurrencyPipe } from './pipes/currency.pipe';
 import { NumberFormatDirective } from './directives/numberFormat.directive';
@@ -14,8 +16,10 @@ import { BasicListComponent } from './basic-list/basic-list.component';
     AppComponent,
     BasicListComponent,
     NumberFormatDirective,
-    MyCurrencyPipe
-],
+    MyCurrencyPipe,
+    TabOrderDirective,
+    TabOrderItemDirective
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,
