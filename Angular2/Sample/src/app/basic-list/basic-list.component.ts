@@ -1,10 +1,7 @@
-import { BROWSER_NOOP_ANIMATIONS_PROVIDERS } from '@angular/platform-browser/animations/src/providers';
 import { HttpClient } from '@angular/common/http';
-import { print } from 'util';
 import { LogService } from '../services/log.service';
 import { Hero } from '../model/hero';
 import { Component, OnInit } from '@angular/core';
-import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-basic-list',
@@ -26,7 +23,6 @@ export class BasicListComponent implements OnInit {
     // subsc.subscribe(data => {
     //   this.heros = data;
     // });
-
   }
 
   bindData() {
@@ -39,5 +35,6 @@ export class BasicListComponent implements OnInit {
   logValue() {
     this.logSvc.log(this.customVal);
   }
+
 
 }

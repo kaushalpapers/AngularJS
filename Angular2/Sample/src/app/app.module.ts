@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BasicListComponent } from './basic-list/basic-list.component';
+import { ManualChangeDetectionComponent } from './manual-change-detection/manual-change-detection.component';
 
 @NgModule({
   declarations: [
@@ -18,16 +19,17 @@ import { BasicListComponent } from './basic-list/basic-list.component';
     NumberFormatDirective,
     MyCurrencyPipe,
     TabOrderDirective,
-    TabOrderItemDirective
+    TabOrderItemDirective,
+    ManualChangeDetectionComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     FormsModule
   ],
-  providers: [LogService, MyCurrencyPipe, HttpClientModule, HttpClient ],
+  providers: [LogService, MyCurrencyPipe, HttpClientModule, HttpClient],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  
+export class AppModule {
+
 }

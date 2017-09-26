@@ -17,14 +17,14 @@ export class TabOrderDirective implements AfterContentInit {
       item.tabOrderItemBlur.subscribe((selected: any) => {
         const _tabOrderItems = this.listTabOrderItemDirective.filter((o: TabOrderItemDirective) => o.tabOrderGroup === selected.group);
         if (_tabOrderItems.length > 0) {
-          const next: TabOrderItemDirective = this.FindNext(_tabOrderItems, selected.index, selected.isShiftKeyPressed);
+          const next: TabOrderItemDirective = this.findNext(_tabOrderItems, selected.index, selected.isShiftKeyPressed);
           next.focus();
         }
       });
     });
   }
 
-  FindNext(_tabOrderItems: TabOrderItemDirective[], currentIndex: number, isReverseDirection: boolean): TabOrderItemDirective {
+  findNext(_tabOrderItems: TabOrderItemDirective[], currentIndex: number, isReverseDirection: boolean): TabOrderItemDirective {
     let nextIndex = 1;
     if (isReverseDirection) {
       nextIndex = (currentIndex - 1) < 1 ? _tabOrderItems.length : (currentIndex - 1);
