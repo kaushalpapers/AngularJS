@@ -1,5 +1,6 @@
 import { PubSubService } from '../shared/pubsub.service';
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+declare var $: any;
 
 @Directive({
   selector: '[appTabOrderItem]'
@@ -52,7 +53,7 @@ export class TabOrderItemDirective {
     }
   }
 
-  subscribe() {
+  private subscribe() {
     this.pubSubService.subscribe('TabChanged', (selected) => {
       if (this.tabOrderGroup !== selected.group) {
         return;
@@ -60,28 +61,43 @@ export class TabOrderItemDirective {
 
       if (!selected.isReverseDirection) {
         if (selected.isMaxIndex && this.isGroupMinIndex) {
-          this.focus();
+          this.focus(selected);
         } else if ((selected.index + 1) === this.tabOrderIndex) {
-          this.focus();
+          this.focus(selected);
         }
       } else {
         if (selected.isMinIndex && this.isGroupMaxIndex) {
-          this.focus();
+          this.focus(selected);
         } else if ((selected.index - 1) === this.tabOrderIndex) {
-          this.focus();
+          this.focus(selected);
         }
       }
     });
 
   }
 
-  focus() {
-    this.element.focus();
+  focus(selected: any) {
+    if (this.mIHiddenOrDisabled()) {
+      this.pubSubService.publish('TabChanged',
+        {
+          index: this.tabOrderIndex,
+          group: selected.group,
+          isReverseDirection: selected.isReverseDirection,
+          isMaxIndex: this.isGroupMaxIndex,
+          isMinIndex: this.isGroupMinIndex
+        });
+    } else {
+      this.element.focus();
+    }
   }
 
   private resetKeyState() {
     this.isTabPressed = false;
     this.isShiftPressed = false;
+  }
+
+  private mIHiddenOrDisabled() {
+    return $(this.element).prop('disabled') || !$(this.element).is(':visible');
   }
 }
 

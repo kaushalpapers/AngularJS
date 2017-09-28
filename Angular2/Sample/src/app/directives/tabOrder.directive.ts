@@ -18,7 +18,7 @@ export class TabOrderDirective implements AfterContentInit {
         const _tabOrderItems = this.listTabOrderItemDirective.filter((o: TabOrderItemDirective) => o.tabOrderGroup === selected.group);
         if (_tabOrderItems.length > 0) {
           const next: TabOrderItemDirective = this.findNext(_tabOrderItems, selected.index, selected.isShiftKeyPressed);
-          next.focus();
+          next.focus(selected);
         }
       });
     });
