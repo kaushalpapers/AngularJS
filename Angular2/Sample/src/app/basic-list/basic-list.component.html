@@ -14,14 +14,14 @@
   <br /> Custom Value: {{customVal}}
 
 
-  <div appTabOrder>
-    <input type="text" appTabOrderItem value="1.1" [tabOrderGroup]="'First'" [tabOrderIndex]="1" />
-    <input type="text" appTabOrderItem value="2.1" [tabOrderGroup]="'second'" [tabOrderIndex]="1" />
+  <div>
+    <input type="text" appTabOrderItem value="1.1" [tabOrderGroup]="'First'" [tabOrderIndex]="1" isGroupMinIndex="true" />
+    <input type="text" appTabOrderItem value="2.1" [tabOrderGroup]="'second'" [tabOrderIndex]="1" isGroupMinIndex="true" />
     <input type="text" appTabOrderItem value="1.2" [tabOrderGroup]="'First'" [tabOrderIndex]="2" />
     <input type="text" appTabOrderItem value="2.2" [tabOrderGroup]="'second'" [tabOrderIndex]="2" />
     <input type="text" appTabOrderItem value="1.3" [tabOrderGroup]="'First'" [tabOrderIndex]="3" />
     <input type="text" appTabOrderItem value="2.3" [tabOrderGroup]="'second'" [tabOrderIndex]="3" />
-
-    <button onclick="document.getElementById('second').focus();">Focus Second</button>
+    <input type="text" appTabOrderItem value="1.4" [tabOrderGroup]="'First'" [tabOrderIndex]="4" isGroupMaxIndex="true" />
+    <input type="text" appTabOrderItem value="2.4" [tabOrderGroup]="'second'" [tabOrderIndex]="4" isGroupMaxIndex="true" />
   </div>
 </form>

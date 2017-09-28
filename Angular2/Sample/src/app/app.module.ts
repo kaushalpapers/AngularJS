@@ -1,3 +1,4 @@
+import { PubSubService } from './shared/pubsub.service';
 import { TabOrderDirective } from './directives/tabOrder.directive';
 import { TabOrderItemDirective } from './directives/tabOrderItem.directive';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -27,7 +28,7 @@ import { ManualChangeDetectionComponent } from './manual-change-detection/manual
     BrowserModule,
     FormsModule
   ],
-  providers: [LogService, MyCurrencyPipe, HttpClientModule, HttpClient],
+  providers: [LogService, MyCurrencyPipe, HttpClientModule, HttpClient, PubSubService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
