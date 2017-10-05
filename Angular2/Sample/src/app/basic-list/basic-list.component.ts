@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class BasicListComponent implements OnInit {
   singleHero: Hero;
   heros: Hero[];
-
+  list: any;
   customVal: string;
   constructor(private logSvc: LogService, private http: HttpClient) { }
 
@@ -32,9 +32,11 @@ export class BasicListComponent implements OnInit {
     };
   }
 
+  fill() {
+    this.list = [{ 'group': 'First', 'index': 3 }, { 'group': 'First', 'index': 4 }];
+  }
+
   logValue() {
     this.logSvc.log(this.customVal);
   }
-
-
 }

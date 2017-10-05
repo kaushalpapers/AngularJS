@@ -27,7 +27,10 @@
   <div>
     <input type="text" appTabOrderItem value="1.1" [tabOrderGroup]="'First'" [tabOrderIndex]="1" isGroupMinIndex="true" />
     <input type="text" appTabOrderItem value="1.2" [tabOrderGroup]="'First'" [tabOrderIndex]="2" />
-    <input type="text" appTabOrderItem value="1.3" [tabOrderGroup]="'First'" [tabOrderIndex]="3" disabled />
-    <input type="text" appTabOrderItem value="1.4" [tabOrderGroup]="'First'" [tabOrderIndex]="4" isGroupMaxIndex="true" />
+    <input type="text" appTabOrderItem [value]="item.index" [tabOrderGroup]="item.group" [tabOrderIndex]="item.index" *ngFor="let item of list" />
+    <input type="text" appTabOrderItem value="1.3" [tabOrderGroup]="'First'" [tabOrderIndex]="5" disabled />
+    <input type="text" appTabOrderItem value="1.4" [tabOrderGroup]="'First'" [tabOrderIndex]="6" isGroupMaxIndex="true" />
   </div>
+
+  <button (click)="fill()" >Fill</button>
 </form>
