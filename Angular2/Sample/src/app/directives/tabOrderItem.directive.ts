@@ -1,15 +1,14 @@
 import { PubSubService } from '../shared/pubsub.service';
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 declare var $: any;
 
 @Directive({
   selector: '[appTabOrderItem]'
 })
-export class TabOrderItemDirective {
+export class TabOrderItemDirective implements OnInit {
 
   constructor(private _element: ElementRef, private pubSubService: PubSubService) {
     this.element = _element.nativeElement;
-    this.subscribe();
   }
 
   element: any;
@@ -31,8 +30,9 @@ export class TabOrderItemDirective {
   @Output()
   tabOrderItemBlur = new EventEmitter();
 
-  ngOnInIt() {
-
+  ngOnInit() {
+    this.applyPrefix();
+    this.subscribe();
   }
 
   @HostListener('keydown', ['$event'])
@@ -40,6 +40,7 @@ export class TabOrderItemDirective {
     this.isShiftPressed = $event.shiftKey;
     this.isTabPressed = $event.keyCode === 9;
     if (this.isTabPressed) {
+      this.resetKeyState();
       this.pubSubService.publish('TabChanged',
         {
           index: this.tabOrderIndex,
@@ -48,16 +49,33 @@ export class TabOrderItemDirective {
           isMaxIndex: this.isGroupMaxIndex,
           isMinIndex: this.isGroupMinIndex
         });
-      this.resetKeyState();
+
       return false;
     }
   }
 
+  applyPrefix() {
+    const e = $(this.element).closest('[tabOrderGroupPrefix *= "' + this.tabOrderGroup + '"]');
+    if (e.length > 0) {
+      const prefixes = e.attr('tabOrderGroupPrefix').split(',');
+      prefixes.forEach(item => {
+        const group = item.split(':')[0].trim();
+        if (group === this.tabOrderGroup) {
+          const prefix = item.split(':')[1].trim();
+          this.tabOrderGroup = prefix + this.tabOrderGroup;
+        }
+      });
+    }
+  }
+
   private subscribe() {
+    this.log('Subscribing: Index:' + this.tabOrderIndex + ',Group:' + this.tabOrderGroup);
     this.pubSubService.subscribe('TabChanged', (selected) => {
       if (this.tabOrderGroup !== selected.group) {
         return;
       }
+
+      this.log('TabChanged hit. Index:' + this.tabOrderIndex + ',Group:' + this.tabOrderGroup);
 
       if (!selected.isReverseDirection) {
         if (selected.isMaxIndex && this.isGroupMinIndex) {
@@ -98,6 +116,10 @@ export class TabOrderItemDirective {
 
   private mIHiddenOrDisabled() {
     return $(this.element).prop('disabled') || !$(this.element).is(':visible');
+  }
+
+  log(msg) {
+    console.log(msg);
   }
 }
 
