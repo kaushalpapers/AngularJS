@@ -8,9 +8,11 @@
     {{hero.id}} -- {{hero.name}}
   </div>
 
-  <input type="text" [(appNumberFormat)]="customVal" [decimalUpTo]="0" />
+  <input type="text" [(appNumberFormat)]="customVal" [decimalUpTo]="4" />
 
   <button (click)="logValue()">Value</button>
+  <button (click)="ChangeValue()">Change Value to Something</button>
+  <button (click)="ChangeValue1()">Change Value to Something Else</button>
   <br /> Custom Value: {{customVal}}
 
   <!-- <div tabOrderGroupPrefix="First:Main, second:other">

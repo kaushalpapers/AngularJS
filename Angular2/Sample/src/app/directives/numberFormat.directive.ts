@@ -29,7 +29,9 @@ export class NumberFormatDirective implements OnInit {
   appNumberFormatChange = new EventEmitter();
 
   set appNumberFormat(val) {
+    this.logSvc.log('Set:' + val);
     this.propVal = val;
+    this.ele.nativeElement.value = this.numberWithCommas(this.propVal);
     this.appNumberFormatChange.emit(this.propVal);
   }
 
@@ -41,12 +43,6 @@ export class NumberFormatDirective implements OnInit {
     let val = this.propVal;
     val = this.numberWithCommas(val);
     this.ele.nativeElement.value = val;
-    // this.logSvc.log('NumberFormat loaded.');
-    // this.ngModel.valueChanges.subscribe((value) => {
-    //   this.logSvc.log('Before: ' + value);
-    //   this.ele.nativeElement.value = this.numberWithCommas(value);
-    //   this.logSvc.log('After: ' + this.ele.nativeElement.value);
-    // });
   }
 
   // @HostListener('document:click', ['$event'])

@@ -39,4 +39,12 @@ export class BasicListComponent implements OnInit {
   logValue() {
     this.logSvc.log(this.customVal);
   }
+
+  ChangeValue() {
+    this.customVal = '987654321';
+  }
+
+  ChangeValue1() {
+    this.customVal = '56426131.8787';
+  }
 }
