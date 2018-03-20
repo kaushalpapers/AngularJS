@@ -16,9 +16,10 @@ export class BasicListComponent implements OnInit {
   constructor(private logSvc: LogService, private http: HttpClient) { }
 
   ngOnInit() {
-    this.logSvc.log('basiclist loaded..');
+    // this.logSvc.log('basiclist loaded..');
     this.bindData();
-    this.customVal = '1234568';
+    // this.customVal = '1234568';
+    // this.customVal = '0.5';
     // const subsc = this.http.post<Hero[]>('http://localhost:3000/data', '');
     // subsc.subscribe(data => {
     //   this.heros = data;

@@ -21,6 +21,12 @@ export class NumberFormatDirective implements OnInit {
   decimalUpTo = 0;
 
   @Input()
+  maxValue: number = null;
+
+  @Input()
+  minValue: number = null;
+
+  @Input()
   get appNumberFormat() {
     return this.propVal;
   }
@@ -29,7 +35,6 @@ export class NumberFormatDirective implements OnInit {
   appNumberFormatChange = new EventEmitter();
 
   set appNumberFormat(val) {
-    this.logSvc.log('Set:' + val);
     this.propVal = val;
     this.ele.nativeElement.value = this.numberWithCommas(this.propVal);
     this.appNumberFormatChange.emit(this.propVal);
@@ -74,13 +79,23 @@ export class NumberFormatDirective implements OnInit {
     if (txtVal.split('.').length > 1 && txtVal.split('.')[1].length >= this.decimalUpTo && start > txtVal.indexOf('.')) {
       return false;
     }
+
+    // Max/Min calculation
+    const num = this.constructNumber(event.key);
+    if (this.maxValue && num > this.maxValue) {
+      return false;
+    }
+
+    if (this.minValue && num < this.minValue) {
+      return false;
+    }
   }
 
   @HostListener('keyup', ['$event'])
   handleKeyup(event: any) {
     this.updateValue();
-    // return this.validateNumber(event);
   }
+
 
   updateValue() {
     let start = this.element.selectionStart;
@@ -95,12 +110,33 @@ export class NumberFormatDirective implements OnInit {
 
     const numberOfCommasAfter = (val.match(/,/g) || []).length;
 
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+    this.createFakeDelay();
+
     this.ele.nativeElement.value = val;
 
     if (numberOfCommasAfter > numberOfCommasBefore) {
       start++; end++;
     }
-    this.ele.nativeElement.setSelectionRange(start, end);
+    setTimeout(() => {
+      this.ele.nativeElement.setSelectionRange(start, end);
+    }, 0);
+
+  }
+
+  createFakeDelay() {
+    const key = Math.random();
+    localStorage.setItem(key.toString(), key + 'sdf');
+    const a = localStorage.getItem(key.toString());
   }
 
   numberWithCommas(x) {
@@ -113,11 +149,15 @@ export class NumberFormatDirective implements OnInit {
     const key = window.event ? event.keyCode : event.which;
     if (event.keyCode === 8 || event.keyCode === 46 || event.keyCode === 190) {
       return true;
-    } else if (key < 48 || key > 57) {
+    } else if (!((key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
       return false;
     } else {
       return true;
     }
+  }
+
+  constructNumber(key) {
+    return parseFloat(this.ele.nativeElement.value.replace(new RegExp(',', 'g'), '') + key);
   }
 
 }

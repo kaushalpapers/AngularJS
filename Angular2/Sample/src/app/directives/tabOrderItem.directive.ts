@@ -119,7 +119,7 @@ export class TabOrderItemDirective implements OnInit {
   }
 
   log(msg) {
-    console.log(msg);
+    // console.log(msg);
   }
 }
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="materialChips">
+
+  <head>
+    <script data-require="jquery@2.1.4" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script data-require="angular.js@1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular.js"></script>
+    <script data-require="angular-animation@*" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular-animate.js"></script>
+    <script data-require="angular-aria@1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular-aria.js"></script>
+    <link data-require="angular-material@0.9.0" data-semver="0.9.0" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.css" />
+    <script data-require="angular-material@0.9.0" data-semver="0.9.0" src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.js"></script>
+    <script data-require="underscore.js@1.5.2" data-semver="1.5.2" src="//cdn.jsdelivr.net/underscorejs/1.5.2/underscore-min.js"></script>
+    <script src="script.js"></script>
+  </head>
+
+  <body ng-controller="ChipsController">
+
+    <md-chips class="custom-chips selected" ng-model="xyz" readonly="true">
+        <button ng-if="$chip.isRemoveable"
+        class="md-chip-remove ng-scope" 
+        md-chip-remove
+        type="button"
+        aria-hidden="true" tabindex="-1">
+        <md-icon md-svg-icon="md-close"></md-icon>
+        <span class="md-visually-hidden ng-binding">Remove</span>
+    </button>
+      <md-chip-template style="cursor: pointer;">
+        <span ui-sref="" ng-dblclick='editChip($chip)' ng-show='!($chip.isEditing && $chip.isEditable)'>
+          {{$chip.key}}
+        </span>
+        <span ng-show='$chip.isEditing && $chip.isEditable'>
+          <input type="text" ng-model='$chip.key' style="width:100px;" ng-blur="doneEditChip($chip)" />
+          <!-- <button ng-click='doneEditChip($chip)'>U</button> -->
+        </span>
+        
+      </md-chip-template>
+    </md-chips>
+
+  </body>
+
+</html>
